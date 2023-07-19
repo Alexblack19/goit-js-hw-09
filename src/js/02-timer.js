@@ -7,8 +7,7 @@ const timer = {
   start() {
     const startTime = Date.now();
     setInterval(() => {
-      const currentTime = Date.now();
-      console.log(currentTime);
+      const currentTime = Date.now();      
     }, 1000);
   },
 };
