@@ -7,16 +7,19 @@ btnStartEl.addEventListener('click', onBtnStartClick);
 btnStopEl.addEventListener('click', onBtnStopClick);
 
 function onBtnStartClick(e) {
+  console.dir(e.target);
   e.target.setAttribute('disabled', '');
+  e.target.nextElementSibling.removeAttribute('disabled');
   timerId = setInterval(() => {
     const color = getRandomHexColor();
     bodyEl.style.backgroundColor = color;
   }, 1000);
 }
 
-function onBtnStopClick(e) {  
-  clearInterval(timerId); 
-  e.target.previousElementSibling.removeAttribute('disabled');   
+function onBtnStopClick(e) {
+  clearInterval(timerId);
+  e.target.setAttribute('disabled', '');
+  e.target.previousElementSibling.removeAttribute('disabled');
 }
 
 function getRandomHexColor() {
