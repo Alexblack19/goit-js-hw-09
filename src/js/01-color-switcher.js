@@ -6,7 +6,7 @@ let timerId = null;
 btnStartEl.addEventListener('click', onBtnStartClick);
 btnStopEl.addEventListener('click', onBtnStopClick);
 
-function onBtnStartClick(e) {
+function onBtnStartClick(e) {  
   e.target.setAttribute('disabled', '');
   e.target.nextElementSibling.removeAttribute('disabled');
   timerId = setInterval(() => {

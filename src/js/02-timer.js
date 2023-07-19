@@ -11,7 +11,7 @@ const refs = {
   spanSecondsEl: document.querySelector('span[data-seconds]'),
 };
 
-refs.startBtn.addEventListener('click', e => {
+refs.startBtn.addEventListener('click', e => {  
   e.target.setAttribute('disabled', '');
   timer.start();
 });
