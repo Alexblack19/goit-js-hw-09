@@ -4,6 +4,9 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 const startBtn = document.querySelector('button[data-start]');
+
+
+
 startBtn.addEventListener('click', e => {
   e.target.setAttribute('disabled', '');
   timer.start();
@@ -16,11 +19,14 @@ const timer = {
   start() {
     const startTime = Date.now();
 
-    this.intervalId = setInterval(() => {
+    this.intervalId = setInterval(() => {      
       const currentTime = Date.now();
       const deltaTime = currentTime - startTime;
       const timerComponents = convertMs(deltaTime);
       console.log(timerComponents);
+      const { days, hours, minutes, seconds } = timerComponents;
+      
+
     }, 1000);
   },
 };
