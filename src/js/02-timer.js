@@ -3,11 +3,15 @@ import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
 import 'flatpickr/dist/flatpickr.min.css';
 
-const startBtn = document.querySelector('button[data-start]');
+const refs = {
+  startBtn: document.querySelector('button[data-start]'),
+  spanDaysEl: document.querySelector('span[data-days]'),
+  spanHoursEl: document.querySelector('span[data-hours]'),
+  spanMinutesEl: document.querySelector('span[data-minutes]'),
+  spanSecondsEl: document.querySelector('span[data-seconds]'),
+};
 
-
-
-startBtn.addEventListener('click', e => {
+refs.startBtn.addEventListener('click', e => {
   e.target.setAttribute('disabled', '');
   timer.start();
 });
@@ -18,21 +22,28 @@ const timer = {
 
   start() {
     const startTime = Date.now();
+    console.log(startTime);
 
-    this.intervalId = setInterval(() => {      
+    this.intervalId = setInterval(() => {
       const currentTime = Date.now();
       const deltaTime = currentTime - startTime;
       const timerComponents = convertMs(deltaTime);
       console.log(timerComponents);
       const { days, hours, minutes, seconds } = timerComponents;
-      
-
+      timerValueUpdate(days, hours, minutes, seconds);
     }, 1000);
   },
 };
 
 function pad(value) {
   return String(value).padStart(2, '0');
+}
+
+function timerValueUpdate(days, hours, minutes, seconds) {
+  refs.spanDaysEl.textContent = days;
+  refs.spanHoursEl.textContent = hours;
+  refs.spanMinutesEl.textContent = minutes;
+  refs.spanSecondsEl.textContent = seconds;
 }
 
 function convertMs(ms) {
@@ -53,5 +64,3 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-
-
