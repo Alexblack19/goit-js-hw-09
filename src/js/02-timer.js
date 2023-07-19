@@ -3,10 +3,20 @@ import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
 import 'flatpickr/dist/flatpickr.min.css';
 
+const startBtn = document.querySelector('button[data-start]');
+startBtn.addEventListener('click', e => {
+  e.target.setAttribute('disabled', '');
+  timer.start();
+});
+
 const timer = {
+  intervalId: null,
+  isActive: false,
+
   start() {
     const startTime = Date.now();
-    setInterval(() => {
+
+    this.intervalId = setInterval(() => {
       const currentTime = Date.now();
       const deltaTime = currentTime - startTime;
       const timerComponents = convertMs(deltaTime);
@@ -15,7 +25,6 @@ const timer = {
   },
 };
 
-timer.start();
 function pad(value) {
   return String(value).padStart(2, '0');
 }

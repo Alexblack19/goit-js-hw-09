@@ -7,7 +7,8 @@ body {
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fafafa;
+  /* background-color: #fafafa; */
+  background-color: aquamarine;
   color: #212121;
   line-height: 1.5;
 }
@@ -15,4 +16,9 @@ body {
 img {
   display: block;
   max-width: 100%;
+}
+
+.timer,
+.field {
+  display: flex;
 }
