@@ -13,13 +13,13 @@ function onBtnStartClick(e) {
   timerId = setInterval(() => {
     const color = getRandomHexColor();
     bodyEl.style.backgroundColor = color;
-  }, 1000);
+  }, 1000);  
 }
 
 function onBtnStopClick(e) {
   clearInterval(timerId);
   e.target.setAttribute('disabled', '');
-  e.target.previousElementSibling.removeAttribute('disabled');
+  e.target.previousElementSibling.removeAttribute('disabled');  
 }
 
 function getRandomHexColor() {
