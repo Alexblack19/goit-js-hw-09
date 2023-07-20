@@ -13,12 +13,12 @@ const refs = {
 };
 
 refs.startBtn.addEventListener('click', e => {
-  e.target.setAttribute('disabled', '');
+  e.target.setAttribute('disabled', '');  
+  e.target.previousElementSibling.setAttribute('disabled', '')
   timer.start();
 });
 
-
-let selectDateTime = null;
+let selectDateTime;
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -26,31 +26,25 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     selectDateTime = selectedDates[0].getTime();
-    console.log(selectDateTime);
   },
 };
 flatpickr(refs.inputEl, options);
 
-
-
-
-
 const timer = {
   start() {
-    // const startTime = Date.now();
-    console.log(selectDateTime);
+    const finishDateTime = selectDateTime;
 
     const intervalId = setInterval(() => {
       const currentTime = Date.now();
-      const deltaTime = currentTime - startTime;
-      const timerComponents = convertMs(deltaTime);
-      const { days, hours, minutes, seconds } = timerComponents;
-      timerValueUpdate(days, hours, minutes, seconds);
+      const deltaTime = finishDateTime - currentTime;      
+      const timerComponents = convertMs(deltaTime);         
+      timerValueUpdate(timerComponents);
     }, 1000);
   },
 };
 
-function timerValueUpdate(days, hours, minutes, seconds) {
+function timerValueUpdate(timerComponents) {
+  const { days, hours, minutes, seconds } = timerComponents;
   refs.spanDaysEl.textContent = days;
   refs.spanHoursEl.textContent = hours;
   refs.spanMinutesEl.textContent = minutes;
