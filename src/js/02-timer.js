@@ -17,23 +17,28 @@ refs.startBtn.addEventListener('click', e => {
   timer.start();
 });
 
+
+let selectDateTime = null;
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    return selectedDates[0].getTime();
+    selectDateTime = selectedDates[0].getTime();
+    console.log(selectDateTime);
   },
 };
 flatpickr(refs.inputEl, options);
 
-const startTime = options.onClose();
-console.log(startTime);
+
+
+
 
 const timer = {
   start() {
     // const startTime = Date.now();
+    console.log(selectDateTime);
 
     const intervalId = setInterval(() => {
       const currentTime = Date.now();
