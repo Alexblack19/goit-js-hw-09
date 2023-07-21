@@ -13,6 +13,11 @@ const refs = {
 };
 
 refs.startBtn.setAttribute('disabled', '');
+refs.startBtn.addEventListener('click', e => {
+  e.target.setAttribute('disabled', '');
+  e.target.previousElementSibling.setAttribute('disabled', '');
+  timer.start();
+});
 
 let finishDateTime;
 const options = {
@@ -28,12 +33,6 @@ const options = {
   },
 };
 flatpickr(refs.inputEl, options);
-
-refs.startBtn.addEventListener('click', e => {
-  e.target.setAttribute('disabled', '');
-  e.target.previousElementSibling.setAttribute('disabled', '');
-  timer.start();
-});
 
 const timer = {
   start() {
