@@ -3,8 +3,7 @@ const formEl = document.querySelector('.form');
 formEl.addEventListener('submit', onSubmit);
 
 function onSubmit(e) {  
-  e.preventDefault();
-  console.dir(e);
+  e.preventDefault();  
   const position = e.target.elements.delay.value;
   const delay = e.target.elements.step.value;
   const amount = e.target.elements.amount.value; 
@@ -15,7 +14,7 @@ function onSubmit(e) {
 }
 
 function createPromise(position, delay) { 
-  const shouldResolve = Math.random() > 0.3;
+  const shouldResolve = Math.random() > 0.3; 
   if (shouldResolve) {
     // Fulfill
   } else {
