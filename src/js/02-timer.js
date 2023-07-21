@@ -2,6 +2,8 @@
 import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
 import 'flatpickr/dist/flatpickr.min.css';
+// all modules
+import Notiflix from 'notiflix';
 
 const refs = {
   inputEl: document.querySelector('#datetime-picker'),
@@ -24,6 +26,8 @@ const options = {
     finishDateTime = selectedDates[0].getTime();
     if (finishDateTime > Date.now()) {
       refs.startBtn.removeAttribute('disabled');
+    } else {
+      Notiflix.Notify.failure('Please shoose a date in the future');
     }
   },
 };
