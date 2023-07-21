@@ -13,31 +13,32 @@ const refs = {
 };
 
 refs.startBtn.addEventListener('click', e => {
-  e.target.setAttribute('disabled', '');  
-  e.target.previousElementSibling.setAttribute('disabled', '')
+  e.target.setAttribute('disabled', '');
+  e.target.previousElementSibling.setAttribute('disabled', '');
   timer.start();
 });
 
-let selectDateTime;
+let finishDateTime;
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    selectDateTime = selectedDates[0].getTime();
+    finishDateTime = selectedDates[0].getTime();
+    if (finishDateTime < Date.now()) {
+      refs.startBtn.setAttribute('disabled', '');
+    }
   },
 };
 flatpickr(refs.inputEl, options);
 
 const timer = {
   start() {
-    const finishDateTime = selectDateTime;
-
     const intervalId = setInterval(() => {
       const currentTime = Date.now();
-      const deltaTime = finishDateTime - currentTime;      
-      const timerComponents = convertMs(deltaTime);         
+      const deltaTime = finishDateTime - currentTime;
+      const timerComponents = convertMs(deltaTime);
       timerValueUpdate(timerComponents);
     }, 1000);
   },
