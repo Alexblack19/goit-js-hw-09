@@ -41,6 +41,10 @@ const timer = {
       const timerComponents = convertMs(deltaTime);
       timerValueUpdate(timerComponents);
     }, 1000);
+    this.stop(intervalId);
+  },
+  stop(intervalId) {
+    console.log(intervalId);
   },
 };
 
