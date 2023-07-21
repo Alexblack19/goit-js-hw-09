@@ -28,7 +28,7 @@ function onSubmit(e) {
   const amount = Number(e.target.elements.amount.value);
 
   for (let position = 1; position <= amount; position += 1) {
-    console.log(position,delay);
+    console.log(position, delay);
     setTimeout(createPromise(position, delay), delay);
     delay = delay + step;
   }
