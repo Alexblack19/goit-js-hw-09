@@ -2,11 +2,16 @@
 import Notiflix from 'notiflix';
 
 const formEl = document.querySelector('.form');
+formEl.reset();
 
-formEl.addEventListener('input', onValueInput);
-function onValueInput(e) {  
-  console.log(e.target.value);
-  if (e.target.value < 0) {
+formEl.addEventListener('input', onVerifyValueInput);
+function onVerifyValueInput(e) {
+  const { delay, step, amount } = e.currentTarget.elements;
+  if (
+    Number(delay.value) < 0 ||
+    Number(step.value) < 0 ||
+    Number(amount.value) < 0
+  ) {
     Notiflix.Notify.failure('❌ Values must be positive');
     formEl.lastElementChild.setAttribute('disabled', '');
   } else {
@@ -18,13 +23,15 @@ formEl.addEventListener('submit', onSubmit);
 
 function onSubmit(e) {
   e.preventDefault();
-  const position = Number(e.target.elements.delay.value);
-  const delay = Number(e.target.elements.step.value);
+  let delay = Number(e.target.elements.delay.value);
+  const step = Number(e.target.elements.step.value);
   const amount = Number(e.target.elements.amount.value);
-  for (let i = 1; i <= amount; i += 1) {
-    createPromise(position, delay);
+
+  for (let position = 1; position <= amount; position += 1) {
+    console.log(position,delay);
+    setTimeout(createPromise(position, delay), delay);
+    delay = delay + step;
   }
-  e.currentTarget.reset();
 }
 
 function createPromise(position, delay) {
