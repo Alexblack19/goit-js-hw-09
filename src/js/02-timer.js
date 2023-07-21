@@ -40,11 +40,21 @@ const timer = {
       const deltaTime = finishDateTime - currentTime;
       const timerComponents = convertMs(deltaTime);
       timerValueUpdate(timerComponents);
+      this.stop(intervalId, timerComponents);
     }, 1000);
-    this.stop(intervalId);
   },
-  stop(intervalId) {
-    console.log(intervalId);
+  stop(intervalId, timerComponents) {
+    const { days, hours, minutes, seconds } = timerComponents;
+    if (
+      days === '00' &&
+      hours === '00' &&
+      minutes === '00' &&
+      seconds === '00'
+    ) {
+      clearInterval(intervalId);
+      refs.inputEl.removeAttribute('disabled')
+      refs.startBtn.removeAttribute('disabled');
+    }
   },
 };
 
@@ -54,6 +64,7 @@ function timerValueUpdate(timerComponents) {
   refs.spanHoursEl.textContent = hours;
   refs.spanMinutesEl.textContent = minutes;
   refs.spanSecondsEl.textContent = seconds;
+  console.log(seconds);
 }
 
 function addLeadingZero(value) {
