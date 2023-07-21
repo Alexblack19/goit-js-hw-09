@@ -12,11 +12,7 @@ const refs = {
   spanSecondsEl: document.querySelector('span[data-seconds]'),
 };
 
-refs.startBtn.addEventListener('click', e => {
-  e.target.setAttribute('disabled', '');
-  e.target.previousElementSibling.setAttribute('disabled', '');
-  timer.start();
-});
+refs.startBtn.setAttribute('disabled', '');
 
 let finishDateTime;
 const options = {
@@ -26,12 +22,18 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     finishDateTime = selectedDates[0].getTime();
-    if (finishDateTime < Date.now()) {
-      refs.startBtn.setAttribute('disabled', '');
+    if (finishDateTime > Date.now()) {
+      refs.startBtn.removeAttribute('disabled');
     }
   },
 };
 flatpickr(refs.inputEl, options);
+
+refs.startBtn.addEventListener('click', e => {
+  e.target.setAttribute('disabled', '');
+  e.target.previousElementSibling.setAttribute('disabled', '');
+  timer.start();
+});
 
 const timer = {
   start() {
@@ -52,8 +54,7 @@ const timer = {
       seconds === '00'
     ) {
       clearInterval(intervalId);
-      refs.inputEl.removeAttribute('disabled')
-      refs.startBtn.removeAttribute('disabled');
+      refs.inputEl.removeAttribute('disabled');
     }
   },
 };
@@ -64,7 +65,6 @@ function timerValueUpdate(timerComponents) {
   refs.spanHoursEl.textContent = hours;
   refs.spanMinutesEl.textContent = minutes;
   refs.spanSecondsEl.textContent = seconds;
-  console.log(seconds);
 }
 
 function addLeadingZero(value) {
