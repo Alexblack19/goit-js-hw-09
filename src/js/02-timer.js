@@ -24,7 +24,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     finishDateTime = selectedDates[0].getTime();
-    if (finishDateTime > Date.now()) {
+    if (finishDateTime > Date.now()) {      
       refs.startBtn.removeAttribute('disabled');
     } else {
       Notiflix.Notify.failure('Please shoose a date in the future');
@@ -33,7 +33,7 @@ const options = {
 };
 flatpickr(refs.inputEl, options);
 
-refs.startBtn.addEventListener('click', e => {
+refs.startBtn.addEventListener('click', e => {  
   e.target.setAttribute('disabled', '');
   e.target.previousElementSibling.setAttribute('disabled', '');
   timer.start();
