@@ -1,3 +1,13 @@
+
+
+
+
+
+
+
+
+
+
 // Описаний в документації
 import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
@@ -13,6 +23,27 @@ const refs = {
   spanMinutesEl: document.querySelector('span[data-minutes]'),
   spanSecondsEl: document.querySelector('span[data-seconds]'),
 };
+
+
+//===========================
+
+// addBtnReset();
+// function addBtnReset() {
+//   refs.startBtn.insertAdjacentHTML('afterend', '<button type="button" data-reset>Reset</button>');
+//   const resetBtnEl = document.querySelector("button[data-reset]");
+//   resetBtnEl.addEventListener('click', (e) => {
+//     e.preventDefault();
+
+//   });
+// }
+
+//============================
+
+
+
+
+
+
 
 refs.startBtn.setAttribute('disabled', '');
 
@@ -40,6 +71,7 @@ refs.startBtn.addEventListener('click', e => {
 });
 
 const timer = {
+  intervalId: null,
   start() {
     const intervalId = setInterval(() => {
       const currentTime = Date.now();
@@ -48,6 +80,7 @@ const timer = {
       timerValueUpdate(timerComponents);
       this.stop(intervalId, timerComponents);
     }, 1000);
+    console.log(intervalId);
   },
   stop(intervalId, timerComponents) {
     const { days, hours, minutes, seconds } = timerComponents;
@@ -60,8 +93,13 @@ const timer = {
       clearInterval(intervalId);
       refs.inputEl.removeAttribute('disabled');
     }
-  },
+  },  
 };
+
+
+console.log(timer.intervalId);
+
+
 
 function timerValueUpdate(timerComponents) {
   const { days, hours, minutes, seconds } = timerComponents;
