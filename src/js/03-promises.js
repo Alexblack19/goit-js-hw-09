@@ -2,9 +2,18 @@
 import Notiflix from 'notiflix';
 
 const formEl = document.querySelector('.form');
+console.dir(formEl);
+addBtnReset();
 formEl.reset();
-
 formEl.addEventListener('input', onVerifyValueInput);
+formEl.addEventListener('submit', onFormSubmit);
+
+function addBtnReset() {
+  formEl.insertAdjacentHTML('afterend', '<button type="button">Reset</button>');
+  const resetBtnEl = document.querySelector("button[type='button']");
+  resetBtnEl.addEventListener('click', () => formEl.reset());
+}
+
 function onVerifyValueInput(e) {
   const { delay, step, amount } = e.currentTarget.elements;
   if (
@@ -19,9 +28,7 @@ function onVerifyValueInput(e) {
   }
 }
 
-formEl.addEventListener('submit', onSubmit);
-
-function onSubmit(e) {
+function onFormSubmit(e) {
   e.preventDefault();
   let delay = Number(e.target.elements.delay.value);
   const step = Number(e.target.elements.step.value);
@@ -33,7 +40,7 @@ function onSubmit(e) {
       .then(successfulPromisMessage)
       .catch(failurePromisMessage);
     delay += step;
-  }
+  }  
 }
 
 function createPromise(position, delay) {
