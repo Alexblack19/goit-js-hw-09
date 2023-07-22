@@ -23,6 +23,12 @@ label {
 
 /** Timer style */
 
+button {
+  margin-right: 10px;
+  background-color: aqua;
+  color: red;
+}
+
 .timer {
   margin-top: 10px;
   display: flex;
