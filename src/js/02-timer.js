@@ -17,7 +17,7 @@ const refs = {
 // === Add button reset ===
 refs.startBtn.insertAdjacentHTML(
   'afterend',
-  '<button style = "display: inline-block; margin-left: 5px" type="button" data-reset>Reset</button>'
+  '<button style = "margin-left: 5px" type="button" data-reset>Reset</button>'
 );
 const resetBtnEl = document.querySelector('button[data-reset]');
 resetBtnEl.style
@@ -48,9 +48,7 @@ refs.startBtn.addEventListener('click', e => {
   timer.start();
 });
 
-const timer = {
-  intervalId: null,
-  timerComponents: {},
+const timer = {  
   start() {
     const intervalId = setInterval(() => {
       const currentTime = Date.now();
