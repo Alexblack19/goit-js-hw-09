@@ -2,7 +2,6 @@
 import Notiflix from 'notiflix';
 
 const formEl = document.querySelector('.form');
-console.dir(formEl);
 addBtnReset();
 formEl.reset();
 formEl.addEventListener('input', onVerifyValueInput);
