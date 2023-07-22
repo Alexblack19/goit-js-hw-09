@@ -48,31 +48,33 @@ refs.startBtn.addEventListener('click', e => {
   timer.start();
 });
 
-const timer = {  
+const timer = {
+  intervalId: null,
+  timerComponents: {},
   start() {
-    const intervalId = setInterval(() => {
+    this.intervalId = setInterval(() => {
       const currentTime = Date.now();
       const deltaTime = finishDateTime - currentTime;
-      const timerComponents = convertMs(deltaTime);
-      timerValueUpdate(timerComponents);
-      resetBtnEl.addEventListener('click', e => this.reset(intervalId));
-      this.finish(intervalId, timerComponents);
+      this.timerComponents = convertMs(deltaTime);
+      timerValueUpdate(this.timerComponents);
+      resetBtnEl.addEventListener('click', e => this.reset());
+      this.finish();
     }, 1000);
   },
-  finish(intervalId, timerComponents) {
-    const { days, hours, minutes, seconds } = timerComponents;
+  finish() {
+    const { days, hours, minutes, seconds } = this.timerComponents;
     if (
       days === '00' &&
       hours === '00' &&
       minutes === '00' &&
       seconds === '00'
     ) {
-      clearInterval(intervalId);
+      clearInterval(this.intervalId);
       refs.inputEl.removeAttribute('disabled');
     }
   },
-  reset(intervalId) {
-    clearInterval(intervalId);
+  reset() {
+    clearInterval(this.intervalId);
     refs.inputEl.removeAttribute('disabled');
     refs.spanDaysEl.textContent = '00';
     refs.spanHoursEl.textContent = '00';
