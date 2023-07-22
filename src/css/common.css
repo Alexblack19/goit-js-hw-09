@@ -23,11 +23,6 @@ label {
 
 /** Timer style */
 
-button[data-reset] {
-  display: inline-block;
-  margin-left: 5px;
-}
-
 .timer {
   margin-top: 10px;
   display: flex;

@@ -17,9 +17,10 @@ const refs = {
 // === Add button reset ===
 refs.startBtn.insertAdjacentHTML(
   'afterend',
-  '<button type="button" data-reset>Reset</button>'
+  '<button style = "display: inline-block; margin-left: 5px" type="button" data-reset>Reset</button>'
 );
 const resetBtnEl = document.querySelector('button[data-reset]');
+resetBtnEl.style
 //=========================
 
 refs.startBtn.setAttribute('disabled', '');
