@@ -28,8 +28,11 @@ function onSubmit(e) {
   const amount = Number(e.target.elements.amount.value);
 
   for (let position = 1; position <= amount; position += 1) {
-    createPromise(position, delay);
-    delay = delay + step;
+    console.log(position, delay);
+    createPromise(position, delay)
+      .then(successfulPromisMessage)
+      .catch(failurePromisMessage);
+    delay += step;
   }
 }
 
@@ -39,18 +42,18 @@ function createPromise(position, delay) {
 
     setTimeout(() => {
       if (shouldResolve) {
-        resolve('Success! Value passed to resolve function');
+        resolve({ position, delay });
       } else {
-        reject('Error! Error passed to reject function');
+        reject({ position, delay });
       }
     }, delay);
   });
 }
 
-createPromise(position, delay)
-  .then(({ position, delay }) => {
-    Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-  })
-  .catch(({ position, delay }) => {
-    Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-  });
+function successfulPromisMessage({ position, delay }) {
+  Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+}
+
+function failurePromisMessage({ position, delay }) {
+  Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+}
