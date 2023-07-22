@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-
 // Описаний в документації
 import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
@@ -24,26 +14,13 @@ const refs = {
   spanSecondsEl: document.querySelector('span[data-seconds]'),
 };
 
-
-//===========================
-
-// addBtnReset();
-// function addBtnReset() {
-//   refs.startBtn.insertAdjacentHTML('afterend', '<button type="button" data-reset>Reset</button>');
-//   const resetBtnEl = document.querySelector("button[data-reset]");
-//   resetBtnEl.addEventListener('click', (e) => {
-//     e.preventDefault();
-
-//   });
-// }
-
-//============================
-
-
-
-
-
-
+// === Add button reset ===
+refs.startBtn.insertAdjacentHTML(
+  'afterend',
+  '<button type="button" data-reset>Reset</button>'
+);
+const resetBtnEl = document.querySelector('button[data-reset]');
+//=========================
 
 refs.startBtn.setAttribute('disabled', '');
 
@@ -72,17 +49,18 @@ refs.startBtn.addEventListener('click', e => {
 
 const timer = {
   intervalId: null,
+  timerComponents: {},
   start() {
     const intervalId = setInterval(() => {
       const currentTime = Date.now();
       const deltaTime = finishDateTime - currentTime;
       const timerComponents = convertMs(deltaTime);
       timerValueUpdate(timerComponents);
-      this.stop(intervalId, timerComponents);
+      resetBtnEl.addEventListener('click', e => this.reset(intervalId));
+      this.finish(intervalId, timerComponents);
     }, 1000);
-    console.log(intervalId);
   },
-  stop(intervalId, timerComponents) {
+  finish(intervalId, timerComponents) {
     const { days, hours, minutes, seconds } = timerComponents;
     if (
       days === '00' &&
@@ -93,13 +71,16 @@ const timer = {
       clearInterval(intervalId);
       refs.inputEl.removeAttribute('disabled');
     }
-  },  
+  },
+  reset(intervalId) {
+    clearInterval(intervalId);
+    refs.inputEl.removeAttribute('disabled');
+    refs.spanDaysEl.textContent = '00';
+    refs.spanHoursEl.textContent = '00';
+    refs.spanMinutesEl.textContent = '00';
+    refs.spanSecondsEl.textContent = '00';
+  },
 };
-
-
-console.log(timer.intervalId);
-
-
 
 function timerValueUpdate(timerComponents) {
   const { days, hours, minutes, seconds } = timerComponents;
