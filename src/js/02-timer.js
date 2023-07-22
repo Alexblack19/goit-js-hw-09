@@ -79,6 +79,7 @@ const timer = {
     refs.spanHoursEl.textContent = '00';
     refs.spanMinutesEl.textContent = '00';
     refs.spanSecondsEl.textContent = '00';
+    flatpickr(refs.inputEl, options);
   },
 };
 
