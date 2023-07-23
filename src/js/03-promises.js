@@ -27,8 +27,7 @@ function onFormSubmit(e) {
   const step = Number(e.target.elements.step.value);
   const amount = Number(e.target.elements.amount.value);
 
-  for (let position = 1; position <= amount; position += 1) {
-    console.log(position, delay);
+  for (let position = 1; position <= amount; position += 1) {    
     createPromise(position, delay)
       .then(successfulPromisMessage)
       .catch(failurePromisMessage);
