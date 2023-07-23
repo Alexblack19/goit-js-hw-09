@@ -14,7 +14,7 @@ const refs = {
   spanSecondsEl: document.querySelector('span[data-seconds]'),
 };
 
-// === Add button reset ===
+// === Button reset ===
 refs.startBtn.insertAdjacentHTML(
   'afterend',
   '<button style = "margin-left: 5px" type="button" data-reset>Reset</button>'
