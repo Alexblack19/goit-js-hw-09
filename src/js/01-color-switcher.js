@@ -3,10 +3,10 @@ const btnStartEl = document.querySelector('button[data-start]');
 const btnStopEl = document.querySelector('button[data-stop]');
 let timerId = null;
 
-btnStartEl.addEventListener('click', onBtnStartClick);
-btnStopEl.addEventListener('click', onBtnStopClick);
+btnStartEl.addEventListener('click', handleBtnStartClick);
+btnStopEl.addEventListener('click', handleBtnStopClick);
 
-function onBtnStartClick(e) {  
+function handleBtnStartClick(e) {  
   e.target.setAttribute('disabled', '');
   e.target.nextElementSibling.removeAttribute('disabled');
   timerId = setInterval(() => {
@@ -15,7 +15,7 @@ function onBtnStartClick(e) {
   }, 1000);
 }
 
-function onBtnStopClick(e) {
+function handleBtnStopClick(e) {
   clearInterval(timerId);
   e.target.setAttribute('disabled', '');
   e.target.previousElementSibling.removeAttribute('disabled');

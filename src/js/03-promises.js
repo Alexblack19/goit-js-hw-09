@@ -4,10 +4,10 @@ import Notiflix from 'notiflix';
 const formEl = document.querySelector('.form');
 
 formEl.reset();
-formEl.addEventListener('input', onVerifyValueInput);
-formEl.addEventListener('submit', onFormSubmit);
+formEl.addEventListener('input', handleVerifyValueInput);
+formEl.addEventListener('submit', handleFormSubmit);
 
-function onVerifyValueInput(e) {
+function handleVerifyValueInput(e) {
   const { delay, step, amount } = e.currentTarget.elements;
   if (
     Number(delay.value) < 0 ||
@@ -21,7 +21,7 @@ function onVerifyValueInput(e) {
   }
 }
 
-function onFormSubmit(e) {
+function handleFormSubmit(e) {
   e.preventDefault();
   let delay = Number(e.target.elements.delay.value);
   const step = Number(e.target.elements.step.value);
